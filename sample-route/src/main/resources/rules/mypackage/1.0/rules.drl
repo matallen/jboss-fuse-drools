@@ -1,0 +1,11 @@
+package org.jboss.fuse.example;
+
+import org.jboss.fuse.brms.Person;
+
+rule "example rule 1"
+when
+	$p:Person(human==true)
+then
+	//System.out.println("Rule fired!");
+	$p.setLikesBeer(true);
+end

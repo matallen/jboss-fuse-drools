@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:camel="http://camel.apache.org/schema/blueprint" xmlns:jaxws="http://cxf.apache.org/blueprint/jaxws" xmlns:cxfcore="http://cxf.apache.org/blueprint/core"
+	xmlns:camel-cxf="http://camel.apache.org/schema/blueprint/cxf" xmlns:cm="http://aries.apache.org/blueprint/xmlns/blueprint-cm/v1.0.0"
+	xsi:schemaLocation="
+      http://cxf.apache.org/blueprint/core http://cxf.apache.org/schemas/blueprint/core.xsd
+      http://camel.apache.org/schema/blueprint http://camel.apache.org/schema/blueprint/camel-blueprint.xsd
+      http://cxf.apache.org/blueprint/jaxws http://cxf.apache.org/schemas/blueprint/jaxws.xsd">
+
+	<bean id="insertObject" class="org.jboss.fuse.brms.InsertObject"/>
+	
+	<bean id="droolsProcessor" class="org.jboss.fuse.brms.utils.DroolsProcessor">
+		<argument value="${brms-server}" />
+		<argument value="${brms-username}" />
+		<argument value="${brms-password}" />
+	</bean>
+
+	<camelContext trace="{{enable.trace}}" xmlns="http://camel.apache.org/schema/blueprint" id="myroute1">
+		<route>
+			<from uri="timer://exercise2?delay=2000" />
+			<log message="Timer fired" />
+			<to uri="bean:insertObject?method=insert()"/>
+			<log message="Before Rules = ${body}" />
+			<to uri="bean:droolsProcessor?method=fire('mypackage','1.0', '${body}')"/>
+			<log message="After Rules = ${body}" />
+		</route>
+
+	</camelContext>
+</blueprint>
