@@ -1,21 +1,21 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
                       http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<name>${project.groupId}.${project.artifactId}</name>
 	<parent>
 		<groupId>org.jboss.fuse</groupId>
-		<artifactId>brms-parent</artifactId>
+		<artifactId>drools-parent</artifactId>
 		<version>5.3.1.BRMS</version>
 	</parent>
-	<artifactId>brms-features</artifactId>
+	<artifactId>drools-features</artifactId>
 	<packaging>pom</packaging>
+	<name>Drools :: Features</name>
 
 	<build>
 		<resources>
 			<resource>
 				<filtering>true</filtering>
 				<includes>
-					<include>features.xml</include>
+					<include>features*.xml</include>
 				</includes>
 				<directory>src/main/resources</directory>
 			</resource>
@@ -49,7 +49,7 @@
 						<configuration>
 							<artifacts>
 								<artifact>
-									<file>${project.build.directory}/classes/features.xml</file>
+									<file>${project.build.directory}/classes/${features.file}</file>
 									<classifier>features</classifier>
 									<type>xml</type>
 								</artifact>

@@ -1,4 +1,4 @@
-package org.jboss.fuse.brms;
+package org.jboss.fuse.drools;
 
 public class Person {
   private boolean human;

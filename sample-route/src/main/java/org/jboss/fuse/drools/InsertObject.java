@@ -1,4 +1,4 @@
-package org.jboss.fuse.brms;
+package org.jboss.fuse.drools;
 
 import org.apache.camel.Exchange;
 

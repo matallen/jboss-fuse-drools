@@ -1,0 +1,90 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.jboss.fuse</groupId>
+		<artifactId>drools-parent</artifactId>
+		<version>5.3.1.BRMS</version>
+	</parent>
+	<artifactId>installer</artifactId>
+	<packaging>pom</packaging>
+	
+	<properties>
+		<maven.repository.id>jboss-enterprise</maven.repository.id>
+		<maven.repository.url>file://${env.HOME}/.m2/repository</maven.repository.url>
+		<!-- 
+		 <maven.repository.url>http://mvnreposerver/nexus/jboss-enterprise</maven.repository.url>
+		 -->
+	</properties>
+	
+	<repositories>
+		<repository>
+			<id>twdata</id>
+			<url>http://twdata-m2-repository.googlecode.com/svn</url>
+		</repository>
+	</repositories>
+	
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.jboss.maven.plugins</groupId>
+				<artifactId>maven-resolver-plugin</artifactId>
+				<version>3.0.2-SNAPSHOT</version>
+				<executions>
+					<execution>
+						<id>deploy-brms</id>
+						<phase>initialize</phase>
+						<goals>
+							<goal>deploy</goal>
+						</goals>
+						<configuration>
+							<rootDir>binaries</rootDir>
+							<includedRegExp>.+.(j|e|w)ar$</includedRegExp>
+							<targetDir>/tmp/brms</targetDir>
+							<versionRegExp>([^/]*)/.*</versionRegExp>
+							<groupPrefix>jboss-enterprise.brms-engine</groupPrefix>
+							<groupMaskRegExp>[^/]*/(.*)</groupMaskRegExp>
+							<excludeRegExp>/samples|/examples|/docs|/tmp|/temp|/work|/src</excludeRegExp>
+							<repositoryId>${maven.repository.id}</repositoryId>
+							<repositoryUrl>${maven.repository.url}</repositoryUrl>
+						</configuration>
+					</execution>
+				</executions>
+				<dependencies>
+					<dependency>
+						<groupId>regexp</groupId>
+						<artifactId>regexp</artifactId>
+						<version>1.2</version>
+					</dependency>
+					<dependency>
+						 <groupId>org.twdata.maven</groupId>
+					    <artifactId>mojo-executor</artifactId>
+					    <version>0.1</version>
+					</dependency>
+					<dependency>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-deploy-plugin</artifactId>
+						<version>2.4</version>
+					</dependency>
+				</dependencies>
+			</plugin>
+			<plugin>
+				<artifactId>maven-antrun-plugin</artifactId>
+				<executions>
+					<execution>
+						<phase>deploy</phase>
+						<goals>
+							<goal>run</goal>
+						</goals>
+						<configuration>
+							<tasks>
+								<delete dir="/tmp/brms" includeemptydirs="true"/>
+							</tasks>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>

@@ -13,7 +13,8 @@
 			<cm:property name="brms-server" value="../../business-rules/src/main/resources/rules" />
 			<cm:property name="brms-server" value="src/main/resources/rules" />
 			 -->
-			<cm:property name="brms-server" value="~/sample-route/src/main/resources/rules"/>
+			<cm:property name="brms-server-disk" value="/home/mallen/Work/poc/jboss-fuse-drools/sample-route/src/main/resources/rules"/>
+			<cm:property name="brms-server-guvnor" value="http://localhost:8080/jboss-brms/org.drools.guvnor.Guvnor/package/"/>
 			<cm:property name="brms-username" value="admin" />
 			<cm:property name="brms-password" value="admin" />
 		</cm:default-properties>

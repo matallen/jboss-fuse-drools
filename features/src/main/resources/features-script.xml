@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <features name="drools">
+	<!--
 	<feature name="drools-core" version="${pom.version}" resolver="(obr)" start-level='50'>
 		<bundle>mvn:org.drools/drools-core-osgi/${pom.version}</bundle>
 		<bundle>mvn:org.mvel/mvel2/2.1.3.Final</bundle>
@@ -22,5 +23,15 @@
 		<bundle>mvn:${pom.groupId}/drools-utils/${pom.version}</bundle>
 		<feature dependency="true">drools-core</feature>
 		<feature dependency="true">drools-compilation</feature>
+	</feature>
+	-->
+	<feature name="drools-all" version="${project.version}" resolver="(obr)" start-level='50'>
+		<bundle>mvn:org.jboss.fuse/drools-uber/${project.version}</bundle>
+		<bundle>wrap:mvn:org.eclipse.jdt.core.compiler/ecj/3.5.1</bundle>
+		<bundle>wrap:mvn:jxl/jxl/2.6.10</bundle>
+		<bundle>wrap:mvn:org.antlr/antlr-runtime/3.3</bundle>
+		<bundle>mvn:commons-io/commons-io/2.4</bundle>
+		<bundle>wrap:mvn:com.thoughtworks.xstream/xstream/1.4.4</bundle>
+		<bundle>wrap:mvn:com.sun.xml.bind/jaxb-xjc/2.2.6</bundle>
 	</feature>
 </features>

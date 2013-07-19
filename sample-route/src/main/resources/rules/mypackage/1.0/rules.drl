@@ -1,8 +1,12 @@
-package org.jboss.fuse.example;
+package org.jboss.drools.example;
 
-import org.jboss.fuse.brms.Person;
+import org.jboss.fuse.drools.Person;
+#declare Person
+#  likesBeer: Integer
+#  human: Boolean
+#end
 
-rule "example rule 1"
+rule "rule1"
 when
 	$p:Person(human==true)
 then

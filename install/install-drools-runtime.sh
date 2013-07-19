@@ -4,7 +4,7 @@
 
 URL="file:///home/mallen/.m2/repository"
 
-FILES=*BRMS*
+FILES=$(find . -name "*BRMS*.jar")
 echo "Going to install the following files"
 for filename in $FILES
 do
@@ -14,7 +14,8 @@ done
 for filename in $FILES
 do
   brmsVersion=$(echo $filename | grep -oE "([0-9]{1}\.)*BRMS")
-  artifactId=$(echo $filename | grep -oE "(.*)-")
+  artifactId=$(echo $filename | grep -oE ".*/(.*)-")
+echo "mvn deploy:deploy-file -Dfile=$filename -DgroupId=org.drools -DartifactId=${artifactId%?} -Dversion=$brmsVersion -Dpackaging=jar -DgeneratePom=true -DcreateChecksum=true -Durl=$URL"
   mvn deploy:deploy-file -Dfile=$filename -DgroupId=org.drools -DartifactId=${artifactId%?} -Dversion=$brmsVersion -Dpackaging=jar -DgeneratePom=true -DcreateChecksum=true -Durl=$URL
 done
 
