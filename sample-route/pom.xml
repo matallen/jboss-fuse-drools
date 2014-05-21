@@ -17,8 +17,8 @@
 	
 	<dependencies>
 		<dependency>
-			<groupId>com.truphone.esb</groupId>
-			<artifactId>rule-domain</artifactId>
+			<groupId>org.jboss.fuse</groupId>
+			<artifactId>drools-sample-rule-domain</artifactId>
 			<version>1.0.0-SNAPSHOT</version>
 		</dependency>
 	
